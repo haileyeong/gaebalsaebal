@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
+	
+	<typeAliases>
+		<typeAlias type="com.devquiz.biz.model.GameVO" alias="game"/>
+		<typeAlias type="com.devquiz.biz.model.CategoryVO" alias="cate"/>
+		<typeAlias type="com.devquiz.biz.model.BoardVO" alias="board"/>
+		<typeAlias type="com.devquiz.biz.model.MemberVO" alias="member"/>
+		<typeAlias type="com.devquiz.biz.model.ProductVO" alias="product"/>
+	</typeAliases>
+
+   
+</configuration>

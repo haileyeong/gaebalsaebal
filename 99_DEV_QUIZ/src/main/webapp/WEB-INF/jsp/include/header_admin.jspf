@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>뎁퀴즈_관리자</title>
+<style>
+	 #logo-container {
+        text-align: center;
+    }
+
+    #logo {
+        display: inline-block; 
+    }
+
+    #logo img {
+        height: 150px;  
+        display: inline-block;
+        margin-left: 232px;
+    }
+
+    .profile {
+        display: inline-block;
+        float: right;
+        margin-right: 50px;
+        margin-top: 80px;
+    }
+	.custom-navbar {
+        background-color: #3d5a80; 
+   	 }   	    	
+   	.nav-link {
+   		color: white;
+   		margin-left: 50px;
+   	}
+  
+  	.nav-link2 {
+   		color: grey;
+   		margin-left: 150px;
+   	}
+   	button {
+   		text-align: right;
+   	}
+
+</style>
+</head>
+<body>
+<div id="logo-container">
+	<div id="logo">
+		<a href="/devquiz/devquiz_main"><img src="${pageContext.request.contextPath}/resources/images/test.png"></a>		
+	</div>
+	<span class="profile">
+		<a href="#"><img src="${pageContext.request.contextPath}/resources/images/profile.png" />
+</a>
+		닉네임 / 포인트
+	</span>
+</div>	
+	<nav class="navbar navbar-expand-sm custom-navbar justify-content-center">
+		<ul class="navbar-nav">
+		    <li class="nav-item">
+		      <a class="nav-link" href="get_member_list">회원 관리</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="get_board_list">커뮤니티 관리</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="get_notice_board_list">공지사항 관리</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="go_game_manage_page">게임 관리</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="admin_product">상점 관리</a>
+		    </li>
+	        <li class="nav-item">
+	            <a class="nav-link" href="#">문의 관리</a>
+	        </li>
+	        <li class="nav-item">
+	            <a class="nav-link" href="go_cate_manage_page">카테고리 관리(근데 추가만됨)</a>
+	        </li>
+		    <li class="user">
+		    	<a href="#">
+		    		<button type="button" class="btn btn-secondary btn-md">로그아웃</button>
+		    	</a>	
+		    </li>
+	  </ul>	  	
+	</nav>
+	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link2" href="#">Sub Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link2" href="#">Sub Page 1</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

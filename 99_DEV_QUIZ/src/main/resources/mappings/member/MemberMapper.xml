@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberDAO">
+
+	<select id="getMemberList" parameterType="member" resultType="member">
+		SELECT *
+		FROM MEMBERS 
+		ORDER BY MEMBER_IDX DESC
+	</select>
+	<select id="getMemberList_I" parameterType="string" resultType="member">
+		SELECT *
+		FROM MEMBERS
+		WHERE ID LIKE '%'|| #{searchKeyword} ||'%' 
+		ORDER BY MEMBER_IDX DESC
+	</select>
+	<select id="getMemberList_N" parameterType="string" resultType="member">
+		SELECT *
+		FROM MEMBERS
+		WHERE NAME LIKE '%'|| #{searchKeyword} ||'%'
+		ORDER BY MEMBER_IDX DESC
+	</select>
+	
+	<select id="getMember" parameterType="member" resultType="member">
+		SELECT *
+		FROM MEMBERS
+		WHERE MEMBER_IDX = #{memberIdx}
+	</select>
+	
+	<update id="updateMember" parameterType="member">
+		UPDATE MEMBERS 
+		SET POINT = #{point}
+		WHERE MEMBER_IDX = #{memberIdx}
+	</update>
+	
+	<update id="deleteMember" parameterType="member">
+		UPDATE MEMBERS SET IS_DEL = 1 WHERE MEMBER_IDX = #{memberIdx} 
+	</update>
+	
+<!-- to. 예림씨 / 관리자가 할 수 있는 최대 권한은 멤버 상태값 변경이라고 생각해서 (1로 변경되면 삭제된것) 37번에 업데이트 쿼리로 수정해보았습니다! // 하영
+	<delete id="deleteMember" parameterType="member">
+		DELETE FROM MEMBERS WHERE MEMBER_IDX = #{memberIdx} 
+	</delete> -->
+
+	<!-- 아이디로 게시글 수 -->
+	<select id="getIdCnt" parameterType="board" resultType="int">
+		SELECT COUNT(BOARD_IDX)
+		FROM BOARDS
+		WHERE MEMBER_IDX = #{memberIdx}
+	</select>
+	
+	<!-- 아이디로 게시글 추출 -->
+	<select id="getId" parameterType="board" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE MEMBER_IDX = #{memberIdx}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+

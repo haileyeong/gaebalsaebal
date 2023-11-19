@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardDAO">
+
+	<!-- 커뮤니티 조회 -->
+	<select id="getBoardList" parameterType="board" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE NOT MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	<select id="getWriter" parameterType="board" resultType="String">
+		SELECT DISTINCT(NICKNAME)
+		FROM MEMBERS
+		WHERE MEMBER_IDX = (
+			SELECT MEMBER_IDX
+			FROM BOARDS
+			WHERE BOARD_IDX = #{boardIdx})
+	</select>
+	<select id="getCategory" parameterType="board" resultType="String">
+		SELECT DISTINCT(CATE_NAME)
+		FROM CATEGORYS
+		WHERE CATE_IDX = (
+			SELECT CATE_IDX
+			FROM BOARDS
+			WHERE BOARD_IDX = #{boardIdx})
+	</select>
+	
+	<select id="getBoardList_T" parameterType="string" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE TITLE LIKE '%'|| #{searchKeyword} ||'%' AND NOT MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	<select id="getBoardList_C" parameterType="string" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE CONTENT LIKE '%'|| #{searchKeyword} ||'%' AND NOT MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<!-- 공지사항 조회 -->
+	<select id="getNoticeBoardList" parameterType="board" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<select id="getNoticeBoardList_T" parameterType="string" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE TITLE LIKE '%'|| #{searchKeyword} ||'%' AND MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	<select id="getNoticeBoardList_C" parameterType="string" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE CONTENT LIKE '%'|| #{searchKeyword} ||'%' AND MEMBER_IDX = '1' 
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<select id="getBoardList_Where" parameterType="board" resultType="board">
+		SELECT *
+		FROM BOARDS
+		<where>
+		<if test='searchCondition == "TITLE" and searchKeyword != "" '>
+			AND TITLE LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test='searchCondition == "CONTENT" and searchKeyword != "" '>
+			AND CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		</where>
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<select id="getBoard" parameterType="board" resultType="board">
+		SELECT *
+		FROM BOARDS
+		WHERE BOARD_IDX = #{boardIdx}
+	</select>	
+	
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO BOARDS (BOARD_IDX, TITLE, CONTENT, REG_DATE, MEMBER_IDX) 
+		VALUES ((SELECT NVL(MAX(BOARD_IDX),0) + 1 FROM BOARDS), #{title}, #{content}, SYSDATE, '1')    
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARDS 
+		SET TITLE = #{title}, 
+		    CONTENT = #{content}
+		WHERE BOARD_IDX = #{boardIdx}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="board">
+		DELETE FROM BOARDS WHERE BOARD_IDX = #{boardIdx} 
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+

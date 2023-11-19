@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="game">
+
+	<!-- select 태그 3개 속성 id, resultType, parameterType
+	id : 사용할 명칭(필수항목), 현재 매퍼파일에서 유일한 이름 사용
+	resultType : 조회 결과값 저장하기 위한 데이터 타입(1개 데이터에 대한 타입지정)
+	parameterType : 전달 받은 파라미터 데이터의 타입 지정(선택적)
+	-->
+	
+	<!-- [이하영] Games 테이블 데이터 사용을 위한 쿼리문 -->
+
+	<!--  -->
+ 	<insert id="insertGame" parameterType="game">
+	INSERT INTO GAMES (QUIZ_IDX, CATE_IDX, QUIZ, SAVED_POINT, SAVED_SCORE, 
+	                   EXAMPLE_NO_1, EXAMPLE_NO_2, EXAMPLE_NO_3, EXAMPLE_NO_4,
+	                   EXAMPLE_NO_5, ANSWER, QUIZ_ORI, QUIZ_FILE)
+	VALUES (QUIZ_SEQ.NEXTVAL, #{cateIdx}, #{quiz}, #{savedPoint}, #{savedScore}, 
+	        #{exampleNo1}, #{exampleNo2}, #{exampleNo3}, #{exampleNo4}, 
+	        #{exampleNo5}, #{answer}, #{quizOri}, #{quizFile})
+	</insert>
+
+</mapper>

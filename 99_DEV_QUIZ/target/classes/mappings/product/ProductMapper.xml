@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productDAO">
+
+   <!--  <select id="getProductList_N" parameterType="product" resultType="product">
+        SELECT *
+        FROM PRODUCTS
+        WHERE PRODUCT_NAME LIKE '%'|| #{productsearchKeyword} ||'%'
+        ORDER BY PRODUCT_IDX DESC
+    </select>
+</mapper>
+	
+	<select id="getProduct" parameterType="product" resultType="product">
+		SELECT *
+		FROM PRODUCTS
+		WHERE PRODUCT_IDX = #{productIdx}
+	</select> -->
+	
+	<insert id="insertProduct" parameterType="product">
+    	INSERT INTO PRODUCTS (PRODUCT_IDX, PRODUCT_NAME, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_CNT, PRODUCT_DATE) 
+    	VALUES (PRODS_SEQ.NEXTVAL, #{productName}, #{productContent}, #{productPrice}, #{productCnt}, SYSDATE)
+	</insert>
+	
+<!-- 	TO. 효정씨~ DB 설계할때 시퀀스도 같이 만들어놔서, max+1 값이 아닌 시퀀스를 사용하시면 되어요~! 윗쪽에 쿼리문 수정해놨는데 확인해보시고 안되면 말씀해주세효! //하
+	<insert id="insertProduct" parameterType="product">
+    	INSERT INTO PRODUCTS (PRODUCT_IDX, PRODUCT_NAME, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_CNT, PRODUCT_DATE) 
+    	VALUES ((SELECT NVL(MAX(PRODUCT_IDX), 0) + 1 FROM PRODUCTS), #{productName}, #{productContent}, #{productPrice}, #{productCnt}, SYSDATE)
+	</insert> -->
+	
+	
+	<update id="updateProduct" parameterType="product">
+		UPDATE PRODUCTS
+		SET PRODUCT_NAME = #{productName}, 
+		    PRODUCT_CONTENT = #{productContent}, 
+		    PRODUCT_PRICE = #{productPrice}, 
+		    PRODUCT_DEL = #{productDel} 
+		WHERE PRODUCT_IDX = #{productIdx}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="product">
+		DELETE FROM FROM PRODUCTS WHERE PRODUCT_IDX = #{productIdx} 
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
